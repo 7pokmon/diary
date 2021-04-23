@@ -24,6 +24,7 @@ public class LoginController extends HttpServlet {
 	// 로그인 액션
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 정보수집
 		this.memberService = new MemberService();
 		String memberId = request.getParameter("memberId");
 		String memberPw = request.getParameter("memberPw");

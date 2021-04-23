@@ -20,14 +20,14 @@ public class RemoveMemberController extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/view/auth/removeMember.jsp").forward(request, response);
 	}
 	// 삭제 액션
-	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 정보수집
+		this.memberService = new MemberService();
 		String memberPw = request.getParameter("memberPw");
 		Member member = (Member)request.getSession().getAttribute("sessionMember");
 		member.setMemberPw(memberPw);
 		
-		this.memberService = new MemberService();
 		boolean result = this.memberService.removeMemberByKey(member);
 		System.out.println(result +"result");
 		if(result == false) { // if(!result) {

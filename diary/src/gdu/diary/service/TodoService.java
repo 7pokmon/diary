@@ -8,5 +8,4 @@ public class TodoService {
 	private DBUtil dbUtil;
 	private TodoDao todoDao;
 	
-	
 }

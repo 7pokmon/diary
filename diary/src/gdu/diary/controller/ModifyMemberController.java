@@ -15,7 +15,6 @@ import gdu.diary.vo.Member;
 @WebServlet("/auth/modifyMember")
 public class ModifyMemberController extends HttpServlet {
 	private MemberService memberService;
-	
 	// 비밀번호 변경 폼
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/WEB-INF/view/auth/modifyMember.jsp").forward(request, response);
@@ -23,19 +22,17 @@ public class ModifyMemberController extends HttpServlet {
 
 	// 비밀번호 변경 action
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		this.memberService = new MemberService();
-
 		// 정보수집
+		this.memberService = new MemberService();
 		String memberPw = request.getParameter("memberPw");
-		
-		// 세션에서 멤버번호 가져오기
-		HttpSession session = request.getSession();
 		Member member = new Member();
-		member = (Member)session.getAttribute("sessionMember");
+		member = (Member)request.getSession().getAttribute("sessionMember");
 		member.setMemberPw(memberPw);
-		//비밀번호 변경 하고 로그아웃 후 로그인페이지 돌아가기
+		System.out.println(member);
+		  
 		this.memberService.modifyMemberPw(member);
 		
+		//비밀번호 변경 하고 로그아웃 후 로그인페이지 돌아가기
 		response.sendRedirect(request.getContextPath()+"/auth/logout");
 	}
 

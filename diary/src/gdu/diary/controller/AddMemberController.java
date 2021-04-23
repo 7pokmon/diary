@@ -21,25 +21,23 @@ public class AddMemberController extends HttpServlet {
 	// 회원가입 액션
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 코드수집
+		// 정보수집
+		this.memberService = new MemberService();
 		String memberId = request.getParameter("memberId");
 		String memberPw = request.getParameter("memberPw");
-		
-		//
 		Member member = new Member();
 		member.setMemberId(memberId);
 		member.setMemberPw(memberPw);
-		System.out.println(member.toString());
 		
-		this.memberService = new MemberService();
+		System.out.println(member);
 		
 		boolean check = this.memberService.checkMemberIdAndAddMember(member);
-		if(check == false) {
+		if(check == false) { // 회원가입 실패시 돌아가기
 			response.sendRedirect(request.getContextPath()+"/addMember");
 			return;
 		}
 		
-		//회원가입 성공
+		// 회원가입 성공시 로그인화면 이동
 		response.sendRedirect(request.getContextPath()+"/login");
 	}
 }

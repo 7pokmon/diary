@@ -55,7 +55,7 @@ public class MemberService {
 			if (this.memberDao.checkMemberId(conn, member) != null) { // 아이디 존재하면 콘솔알림
 				System.out.println("중복된 아이디입니다");
 				checkId = false;
-			} else { // 아이디 없음 ..생성가능
+			} else { // 회원가입
 				this.memberDao.insertMember(conn, member);
 				checkId = true;
 			}
@@ -128,5 +128,4 @@ public class MemberService {
 		}
 		return returnMember;
 	}
-
 }
