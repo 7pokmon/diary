@@ -7,6 +7,10 @@
 <title>diary</title>
 </head>
 <body>
+	<div>${diaryMap.todoList}</div>
+	
+	
+	
 	<!-- 전체 셀 -->
 	<c:set var="totalCell" value="${diaryMap.startBlank + diaryMap.endDay + diaryMap.endBlank}"></c:set>
 	<div>totalCell : ${totalCell}</div>
@@ -23,11 +27,17 @@
 				<!-- 날짜값만 출력하게 변경 (음수면 빈칸,마지막날넘어가면 빈칸)-->
 				<c:set var="num" value="${i-diaryMap.startBlank}"></c:set>
 				<td>
-					<!-- 날짜출력 -->
+					<!-- 날짜출력 / 다이어리 입력 링크 -->
 					<c:if test="${num > 0 && num <= diaryMap.endDay}">
-						<a href="${pageContext.request.contextPath}/auth/addTodo">
-							${num}
-						</a>
+						<a href="${pageContext.request.contextPath}/auth/addTodo?year=${diaryMap.targetYear}&month=${diaryMap.targetMonth+1}&day=${num}">
+							${num}</a>
+							<c:forEach var="todo" items="${diaryMap.todoList}">	
+								<c:if test="${todo.todoDate == num}">
+									<div style="background-color: ${todo.todoFontColor}">
+                                    	<a href="${pageContext.request.contextPath}/auth/todoOne">${todo.todoTitle}</a>
+                                    </div>
+								</c:if>
+							</c:forEach>
 					</c:if>
 					<!-- 빈칸출력 -->
 					<c:if test="${num <= 0 || num > diaryMap.endDay}">

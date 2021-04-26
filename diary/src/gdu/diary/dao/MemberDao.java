@@ -10,11 +10,9 @@ import gdu.diary.vo.Member;
 
 // 2. Dao -> Service
 public class MemberDao {
-	private DBUtil dbUtil;
 
 	// 비밀번호 변경
 	public void updateMemberPw(Connection conn, Member member) throws SQLException {
-		this.dbUtil = new DBUtil();
 		PreparedStatement stmt = null;
 
 		try {
@@ -25,13 +23,12 @@ public class MemberDao {
 			stmt.executeUpdate();
 
 		} finally {
-			this.dbUtil.close(null, stmt, null);
+			stmt.close();
 		}
 	}
 
 	// 회원가입 아이디 유효성검사 - 아이디가 있으면 checkMemberId를 리턴한다.
 	public String checkMemberId(Connection conn, Member member) throws SQLException {
-		this.dbUtil = new DBUtil();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		String checkMemberId = null;
@@ -46,14 +43,13 @@ public class MemberDao {
 			}
 
 		} finally {
-			this.dbUtil.close(null, stmt, rs);
+			stmt.close();
 		}
 		return checkMemberId;
 	}
 
 	// 회원가입
 	public void insertMember(Connection conn, Member member) throws SQLException {
-		this.dbUtil = new DBUtil();
 		PreparedStatement stmt = null;
 
 		try {
@@ -63,14 +59,13 @@ public class MemberDao {
 			System.out.println(stmt + "회원가입");
 			stmt.executeUpdate();
 		} finally {
-			this.dbUtil.close(null, stmt, null);
+			stmt.close();
 		}
 
 	}
 
 	// 계정삭제(트랜잭션)
 	public int deleteMemberByKey(Connection conn, Member member) throws SQLException {
-		this.dbUtil = new DBUtil();
 		int rowCnt = 0;
 		PreparedStatement stmt = null;
 
@@ -81,7 +76,7 @@ public class MemberDao {
 			System.out.println(stmt + "Memberstmt");
 			rowCnt = stmt.executeUpdate();
 		} finally {
-			this.dbUtil.close(null, stmt, null);
+			stmt.close();
 		}
 		return rowCnt;
 	}
@@ -89,7 +84,6 @@ public class MemberDao {
 	// 로그인
 	public Member selectMemberByKey(Connection conn, Member member) throws SQLException {
 		// 초기화
-		this.dbUtil = new DBUtil();
 		Member returnMember = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -107,7 +101,7 @@ public class MemberDao {
 			}
 
 		} finally {
-			this.dbUtil.close(null, stmt, rs);
+			stmt.close();
 		}
 
 		return returnMember;

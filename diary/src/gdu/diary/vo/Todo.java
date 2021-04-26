@@ -6,7 +6,8 @@ public class Todo {
 	private String todoDate;
 	private String todoTitle;
 	private String todoContent;
-	private String todoFontColer;
+	private String todoFontColor;
+	private String todoAddDate;
 	public int getTodoNo() {
 		return todoNo;
 	}
@@ -37,16 +38,23 @@ public class Todo {
 	public void setTodoContent(String todoContent) {
 		this.todoContent = todoContent;
 	}
-	public String getTodoFontColer() {
-		return todoFontColer;
+	public String getTodoFontColor() {
+		return todoFontColor;
 	}
-	public void setTodoFontColer(String todoFontColer) {
-		this.todoFontColer = todoFontColer;
+	public void setTodoFontColor(String todoFontColor) {
+		this.todoFontColor = todoFontColor;
+	}
+	public String getTodoAddDate() {
+		return todoAddDate;
+	}
+	public void setTodoAddDate(String todoAddDate) {
+		this.todoAddDate = todoAddDate;
 	}
 	@Override
 	public String toString() {
 		return "Todo [todoNo=" + todoNo + ", memberNo=" + memberNo + ", todoDate=" + todoDate + ", todoTitle="
-				+ todoTitle + ", todoContent=" + todoContent + ", todoFontColer=" + todoFontColer + "]";
+				+ todoTitle + ", todoContent=" + todoContent + ", todoFontColer=" + todoFontColor + ", todoAddDate="
+				+ todoAddDate + "]";
 	}
 	
 }
