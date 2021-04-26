@@ -17,14 +17,16 @@ public class RemoveTodoController extends HttpServlet {
 	private TodoService todoService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 정보 수집
-		// memberNo 세션에서 가져오기
-		HttpSession session = request.getSession();
-		int memberNo = ((Member)(session.getAttribute("sessionMember"))).getMemberNo();
-		this.todoService = new TodoService();
+		String todoDate = request.getParameter("todoDate");
+		int todoNo = Integer.parseInt(request.getParameter("todoNo"));
+		
 		// 서비스 호출
-		this.todoService.removeTodoOne(memberNo);
+		this.todoService = new TodoService();
+		this.todoService.removeTodoOne(todoNo);
 		System.out.println("todoOne 삭제성공");
-		// 삭제후 diary이동
-		response.sendRedirect(request.getContextPath()+"/auth/diary");
+		
+		// 삭제한 일정 달의 달력으로 돌아가기
+		String[] arr = todoDate.split("-");
+		response.sendRedirect(request.getContextPath() + "/auth/diary?targetYear="+arr[0]+"&targetMonth="+(Integer.parseInt(arr[1])-1));
 	}
 }

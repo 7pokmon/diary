@@ -20,15 +20,15 @@ public class TodoOneController extends HttpServlet {
 	private TodoService todoService;
 	// 일정 상세보기
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		this.todoService = new TodoService();
-		HttpSession session = request.getSession();
-		int memberNo = ((Member)(session.getAttribute("sessionMember"))).getMemberNo();
-		
+		// 정보 수집
+		int todoNo = Integer.parseInt(request.getParameter("todoNo"));
 		// 서비스 호출
-		Todo todo = this.todoService.todoOneList(memberNo);
+		this.todoService = new TodoService();
+		Todo todoOne = new Todo();
+		todoOne = this.todoService.todoOneList(todoNo);
 		
 		// request데이터 넣기
-		request.setAttribute("todo", todo);
+		request.setAttribute("todoOne", todoOne);
 		// view
 		request.getRequestDispatcher("/WEB-INF/view/auth/todoOne.jsp").forward(request, response);
 	}

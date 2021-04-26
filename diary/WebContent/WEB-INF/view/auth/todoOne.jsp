@@ -11,17 +11,18 @@
 	<table>
 		<tr>
 			<td>todoTitle : </td>
-			<td>${todo.todoTitle}</td>
+			<td>${todoOne.todoTitle}</td>
 		</tr>
 		<tr>
 			<td>todoContent : </td>
-			<td>${todo.todoContent}</td>
+			<td>${todoOne.todoContent}</td>
 		</tr>
 		<tr>
 			<td>todoAddDate : </td>
-			<td>${todo.todoAddDate.substring(0,10)}</td>
+			<td>${todoOne.todoAddDate.substring(0,10)}</td>
 		</tr>
 	</table>
-	<a href="${pageContext.request.contextPath}/auth/removeTodo">삭제</a>
+	<a href="${pageContext.request.contextPath}/auth/modifyTodo?todoNo=${todoOne.todoNo}">수정</a>
+	<a href="${pageContext.request.contextPath}/auth/removeTodo?todoNo=${todoOne.todoNo}&todoDate=${todoOne.todoDate}">삭제</a>
 </body>
 </html>

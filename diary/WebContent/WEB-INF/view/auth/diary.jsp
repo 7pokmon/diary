@@ -7,10 +7,6 @@
 <title>diary</title>
 </head>
 <body>
-	<div>${diaryMap.todoList}</div>
-	
-	
-	
 	<!-- 전체 셀 -->
 	<c:set var="totalCell" value="${diaryMap.startBlank + diaryMap.endDay + diaryMap.endBlank}"></c:set>
 	<div>totalCell : ${totalCell}</div>
@@ -34,7 +30,7 @@
 							<c:forEach var="todo" items="${diaryMap.todoList}">	
 								<c:if test="${todo.todoDate == num}">
 									<div style="background-color: ${todo.todoFontColor}">
-                                    	<a href="${pageContext.request.contextPath}/auth/todoOne">${todo.todoTitle}</a>
+                                    	<a href="${pageContext.request.contextPath}/auth/todoOne?todoNo=${todo.todoNo}">${todo.todoTitle}</a>
                                     </div>
 								</c:if>
 							</c:forEach>
